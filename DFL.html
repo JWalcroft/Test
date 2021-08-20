@@ -211,8 +211,8 @@
     var eventMEventListener = window.addEventListener ? "addEventListener" : "attachEvent";
     var eventListener = window[eventMEventListener];
     var event = eventMEventListener == "attachEvent" ? "onmessage" : "message"; 
-    function init() {
-      
+    function init() {  
+        //-- Load a calculation if the page has a session param
         var parentParams = new URLSearchParams(window.location.search);
         var childParams = frame.src.substring(frame.src.indexOf('?'));
         var session = parentParams.get('session');
@@ -220,9 +220,7 @@
           frame.src = 'https://portal-benefits-calculator.turn2us.org.uk/result/' + session + '/' + childParams;
           alert(frame.src)
         }
-      
-        
-      
+        //-- Setup listener for the child iFrame
         eventListener(event, function (e) {
             //-- Resize the iframe to match the child web page
             if (e.data.name === "resize") {
