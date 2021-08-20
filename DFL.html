@@ -214,9 +214,9 @@
     function init() {
       
         var url = new URLSearchParams(window.location.search);
-        var urlParams = url.get('session');
-        if (frame && urlParams) {
-          frame.src = 'https://portal-benefits-calculator.turn2us.org.uk/result/' + window.location.search;
+        var session = url.get('session');
+        if (frame && session) {
+          frame.src = 'https://portal-benefits-calculator.turn2us.org.uk/result/' + session;
           alert(frame.src)
         }
       
