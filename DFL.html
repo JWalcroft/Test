@@ -215,8 +215,12 @@
       
         var url = new URLSearchParams(window.location.search);
         var urlParams = url.get('session');
+        if (frame && urlParams) {
+          frame.src = 'https://portal-benefits-calculator.turn2us.org.uk/result/' + window.location.search;
+          alert(frame.src)
+        }
       
-        alert(urlParams)
+        
       
         eventListener(event, function (e) {
             //-- Resize the iframe to match the child web page
