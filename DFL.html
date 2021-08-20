@@ -213,10 +213,11 @@
     var event = eventMEventListener == "attachEvent" ? "onmessage" : "message"; 
     function init() {
       
-        var url = new URLSearchParams(window.location.search);
-        var session = url.get('session');
+        var parentParams = new URLSearchParams(window.location.search);
+        var childParams = new URLSearchParams(frame.src);
+        var session = parentParams.get('session');
         if (frame && session) {
-          frame.src = 'https://portal-benefits-calculator.turn2us.org.uk/result/' + session;
+          frame.src = 'https://portal-benefits-calculator.turn2us.org.uk/result/' + session + '/' + childParams;
           alert(frame.src)
         }
       
