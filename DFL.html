@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="generator" content="Hugo 0.83.1">
     <title>T2U: Debt Free London Demo</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
@@ -205,7 +204,48 @@
   </div>
 </footer>
 
-<script src="https://portal-benefits-calculator.turn2us.org.uk/static/js/portal.min.js" crossorigin="anonymous"></script>
+<script type="application/javascript" crossorigin="anonymous">
+    
+    var t2uPortal = (function() { 
+    var frame = document.getElementById('t2u-iframe');
+    var eventMEventListener = window.addEventListener ? "addEventListener" : "attachEvent";
+    var eventListener = window[eventMEventListener];
+    var event = eventMEventListener == "attachEvent" ? "onmessage" : "message"; 
+    function init() {
+      
+        var url = new URLSearchParams(window.location.search);
+        var urlParams = url.get('session');
+      
+        alert(urlParams)
+      
+        eventListener(event, function (e) {
+            //-- Resize the iframe to match the child web page
+            if (e.data.name === "resize") {
+                if (e.data.value > 780) {
+                    frame.height = e.data.value + 'px';
+                }
+            }
+            //-- Scroll focus to the top of the iframe
+            if (e.data.name === "scroll") {
+                var position = frame.offsetTop; 
+                if (window.scrollY) {
+                    window.scroll(0, position);  
+                }
+                else if (document.documentElement.scrollTop){
+                    document.documentElement.scrollTop = position;
+                }
+                else if (document.body.scrollTop){
+                    document.body.scrollTop = position;
+                }               
+            }
+        }, false);
+    }
+    return {
+        init: init
+    };
+})();
+
+</script>
 <script type="application/javascript">
   t2uPortal.init();
 </script>
