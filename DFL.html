@@ -138,7 +138,7 @@
               </div>
             </div>
             <hr />
-            <iframe id="t2u-iframe" src="https://portal-benefits-calculator.turn2us.org.uk/survey/?portal=true&id=dfl_live&utm_source=dfl_live&utm_medium=iFrame&utm_campaign=BCPortal" width="100%" height="800" frameborder="0">
+            <iframe id="t2u-iframe" src="https://uat-beta-benefits-calculator.turn2us.org.uk/survey/?portal=true&id=dfl_live&utm_source=dfl_live&utm_medium=iFrame&utm_campaign=BCPortal" width="100%" height="800" frameborder="0">
                 <p>Your browser does not support iframes.</p>
             </iframe>
             <div class="row">
@@ -204,51 +204,7 @@
   </div>
 </footer>
 
-<script type="application/javascript" crossorigin="anonymous">
-    
-    var t2uPortal = (function() { 
-    var frame = document.getElementById('t2u-iframe');
-    var eventMEventListener = window.addEventListener ? "addEventListener" : "attachEvent";
-    var eventListener = window[eventMEventListener];
-    var event = eventMEventListener == "attachEvent" ? "onmessage" : "message"; 
-    function init() {  
-        //-- Load a calculation if the page has a session param
-        var parentParams = new URLSearchParams(window.location.search);
-        var childParams = frame.src.substring(frame.src.indexOf('?'));
-        var session = parentParams.get('session');
-        if (frame && session) {
-          frame.src = 'https://portal-benefits-calculator.turn2us.org.uk/result/' + session + '/' + childParams;
-          alert(frame.src)
-        }
-        //-- Setup listener for the child iFrame
-        eventListener(event, function (e) {
-            //-- Resize the iframe to match the child web page
-            if (e.data.name === "resize") {
-                if (e.data.value > 780) {
-                    frame.height = e.data.value + 'px';
-                }
-            }
-            //-- Scroll focus to the top of the iframe
-            if (e.data.name === "scroll") {
-                var position = frame.offsetTop; 
-                if (window.scrollY) {
-                    window.scroll(0, position);  
-                }
-                else if (document.documentElement.scrollTop){
-                    document.documentElement.scrollTop = position;
-                }
-                else if (document.body.scrollTop){
-                    document.body.scrollTop = position;
-                }               
-            }
-        }, false);
-    }
-    return {
-        init: init
-    };
-})();
-
-</script>
+<script src="https://uat-beta-benefits-calculator.turn2us.org.uk/static/js/portal.uat.min.js" crossorigin="anonymous"></script>
 <script type="application/javascript">
   t2uPortal.init();
 </script>
